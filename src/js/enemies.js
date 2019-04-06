@@ -12,8 +12,7 @@ export default class Enemies {
         setInterval(() => {
             let random = Math.floor(Math.random() * 9);
             let position = this.positions[random]
-            let enemy = new Enemy(position, this.scene);
-            // this.scene.add(enemy.enemy);
+            let enemy = new Enemy(position, this.scene)
             this.enemies.push(enemy);
         }, 1000);
     }
