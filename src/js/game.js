@@ -5,7 +5,8 @@ import Heart from './heart';
 export default class Game {
   constructor() {
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera = new THREE.PerspectiveCamera(230, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera.position.z = 50;
     this.player = new Player();
     this.heart = new Heart();
     this.scene.add(this.heart.heart);
@@ -13,7 +14,6 @@ export default class Game {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.scene.background = new THREE.Color( 0x000000 );
     document.body.appendChild(this.renderer.domElement);
-    this.camera.position.z = 50;
 }
 
 

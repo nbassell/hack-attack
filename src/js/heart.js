@@ -6,7 +6,7 @@ export default class Heart {
   }
   
   startHeart() {
-    var x = 0, y = -33;
+    var x = 50, y = 50;
     var heartShape = new THREE.Shape();
 
     heartShape.moveTo( x + 5, y + 5 );
@@ -20,12 +20,17 @@ export default class Heart {
     var geometry = new THREE.ShapeBufferGeometry( heartShape );
     var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     var mesh = new THREE.Mesh( geometry, material ) ;
-    // myGeometry.center();
+    material.side = THREE.DoubleSide;
+    var center = new THREE.Vector3();
+    mesh.geometry.computeBoundingBox();
+    mesh.geometry.boundingBox.getCenter(center);
+    mesh.geometry.center();
+    mesh.position.copy(center);
+    // geometry.center();
     return mesh;
   }
 
   drawHeart() {
-    console.log(this.heart.rotation);
     this.heart.rotation.y += 0.05;
   }
 }
