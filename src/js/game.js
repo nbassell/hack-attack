@@ -14,16 +14,16 @@ export default class Game {
     this.enemies = new Enemies(this.scene);
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.scene.background = new THREE.Color( 0x000000 );
+    this.scene.background = new THREE.Color(0x000000);
     document.body.appendChild(this.renderer.domElement);
-}
+  }
 
 
   animate() {
     this.renderer.render(this.scene, this.camera);
     this.update();
   }
-  
+
   update() {
     this.heart.drawHeart();
     requestAnimationFrame(this.animate.bind(this));
