@@ -6,7 +6,7 @@ export default class Heart {
   }
   
   startHeart() {
-    var x = 50, y = 50;
+    var x = 0, y = 0;
     var heartShape = new THREE.Shape();
 
     heartShape.moveTo( x + 5, y + 5 );

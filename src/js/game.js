@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import Player from './player';
 import Heart from './heart';
+import Enemies from './enemies';
 
 export default class Game {
   constructor() {
@@ -10,6 +11,7 @@ export default class Game {
     this.player = new Player();
     this.heart = new Heart();
     this.scene.add(this.heart.heart);
+    this.enemies = new Enemies(this.scene);
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.scene.background = new THREE.Color( 0x000000 );
