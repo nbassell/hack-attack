@@ -98,6 +98,30 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
+/***/ "./src/js/game.js":
+/*!************************!*\
+  !*** ./src/js/game.js ***!
+  \************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Game; });\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\n/* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./player */ \"./src/js/player.js\");\n/* harmony import */ var _heart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./heart */ \"./src/js/heart.js\");\n\n\n\n\nclass Game {\n  constructor() {\n    this.scene = new three__WEBPACK_IMPORTED_MODULE_0__[\"Scene\"]();\n    this.camera = new three__WEBPACK_IMPORTED_MODULE_0__[\"PerspectiveCamera\"](75, window.innerWidth / window.innerHeight, 0.1, 1000);\n    this.player = new _player__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\n    this.heart = new _heart__WEBPACK_IMPORTED_MODULE_2__[\"default\"]();\n    this.scene.add(this.heart.heart);\n    this.renderer = new three__WEBPACK_IMPORTED_MODULE_0__[\"WebGLRenderer\"]();\n    this.renderer.setSize(window.innerWidth, window.innerHeight);\n    this.scene.background = new three__WEBPACK_IMPORTED_MODULE_0__[\"Color\"]( 0x000000 );\n    document.body.appendChild(this.renderer.domElement);\n  }\n\n\n  animate() {\n    this.renderer.render(this.scene, this.camera);\n    this.update();\n  }\n  \n  update() {\n    this.heart.drawHeart();\n    requestAnimationFrame(this.animate.bind(this));\n  }\n}\n\n//# sourceURL=webpack:///./src/js/game.js?");
+
+/***/ }),
+
+/***/ "./src/js/heart.js":
+/*!*************************!*\
+  !*** ./src/js/heart.js ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Heart; });\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\n\n\nclass Heart {\n  constructor() {\n    this.heart = this.startHeart();\n  }\n  \n  startHeart() {\n    var x = 75, y = 75;\n    var heartShape = new three__WEBPACK_IMPORTED_MODULE_0__[\"Shape\"]();\n\n    heartShape.moveTo( x + 5, y + 5 );\n    heartShape.bezierCurveTo( x + 5, y + 5, x + 4, y, x, y );\n    heartShape.bezierCurveTo( x - 6, y, x - 6, y + 7,x - 6, y + 7 );\n    heartShape.bezierCurveTo( x - 6, y + 11, x - 3, y + 15.4, x + 5, y + 19 );\n    heartShape.bezierCurveTo( x + 12, y + 15.4, x + 16, y + 11, x + 16, y + 7 );\n    heartShape.bezierCurveTo( x + 16, y + 7, x + 16, y, x + 10, y );\n    heartShape.bezierCurveTo( x + 7, y, x + 5, y + 5, x + 5, y + 5 );\n\n    var geometry = new three__WEBPACK_IMPORTED_MODULE_0__[\"ShapeBufferGeometry\"]( heartShape );\n    var material = new three__WEBPACK_IMPORTED_MODULE_0__[\"MeshBasicMaterial\"]( { color: 0x00ff00 } );\n    var mesh = new three__WEBPACK_IMPORTED_MODULE_0__[\"Mesh\"]( geometry, material ) ;\n    return mesh;\n  }\n\n  drawHeart() {\n    console.log(this.heart.rotation);\n    this.heart.rotation.x += 0.01;\n  }\n}\n\n//# sourceURL=webpack:///./src/js/heart.js?");
+
+/***/ }),
+
 /***/ "./src/js/index.js":
 /*!*************************!*\
   !*** ./src/js/index.js ***!
@@ -106,7 +130,19 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\n\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  var scene = new three__WEBPACK_IMPORTED_MODULE_0__[\"Scene\"]();\n  var camera = new three__WEBPACK_IMPORTED_MODULE_0__[\"PerspectiveCamera\"](75, window.innerWidth / window.innerHeight, 0.1, 1000);\n\n  var geometry = new three__WEBPACK_IMPORTED_MODULE_0__[\"BoxGeometry\"](1, 1, 1);\n  var material = new three__WEBPACK_IMPORTED_MODULE_0__[\"MeshBasicMaterial\"]({ color: 0x00ff00 });\n  var cube = new three__WEBPACK_IMPORTED_MODULE_0__[\"Mesh\"](geometry, material);\n  scene.add(cube);\n\n  var renderer = new three__WEBPACK_IMPORTED_MODULE_0__[\"WebGLRenderer\"]();\n  renderer.setSize(window.innerWidth, window.innerHeight);\n  document.body.appendChild(renderer.domElement);\n\n  camera.position.z = 5;\n\n  function animate() {\n    requestAnimationFrame(animate);\n\n    cube.rotation.x += 0.01;\n    cube.rotation.y += 0.01;\n    \n    renderer.render(scene, camera);\n  }\n\n  animate();\n});\n\n//# sourceURL=webpack:///./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\n/* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./game */ \"./src/js/game.js\");\n\n\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  // var scene = new THREE.Scene();\n  // var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);\n\n  // var geometry = new THREE.BoxGeometry(1, 1, 1);\n  // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });\n  // var cube = new THREE.Mesh(geometry, material);\n  // scene.add(cube);\n\n  // var renderer = new THREE.WebGLRenderer();\n  // renderer.setSize(window.innerWidth, window.innerHeight);\n  // document.body.appendChild(renderer.domElement);\n\n  // camera.position.z = 5;\n\n  // function animate() {\n  //   requestAnimationFrame(animate);\n\n  //   cube.rotation.x += 0.01;\n  //   cube.rotation.y += 0.01;\n    \n  //   renderer.render(scene, camera);\n  // }\n\n  // animate();\n  const game = new _game__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\n  game.animate();\n});\n\n//# sourceURL=webpack:///./src/js/index.js?");
+
+/***/ }),
+
+/***/ "./src/js/player.js":
+/*!**************************!*\
+  !*** ./src/js/player.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Player; });\nclass Player {\n  constructor(scene, camera) {\n    this.scene = scene;\n    this.camera = camera;\n    this.health = 3;\n  }\n\n  isHit() {\n    this.health--;\n  }\n\n  gameOver() {\n    this.health === 0;\n  }\n\n}\n\n//# sourceURL=webpack:///./src/js/player.js?");
 
 /***/ })
 
