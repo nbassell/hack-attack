@@ -13,7 +13,8 @@ export default class Game {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.scene.background = new THREE.Color( 0x000000 );
     document.body.appendChild(this.renderer.domElement);
-  }
+    this.camera.position.z = 50;
+}
 
 
   animate() {
