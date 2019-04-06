@@ -10,7 +10,7 @@ export default class Enemies {
     spawnEnemies() {
         setInterval(() => {
             let enemy = new Enemy();
-            this.scene.add(enemy);
+            this.scene.add(enemy.enemy);
             this.enemies.push(enemy);
         }, 1000);
     }
