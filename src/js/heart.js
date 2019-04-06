@@ -1,11 +1,14 @@
 import * as THREE from 'three';
 
 export default class Heart {
-  constructor() {
+  constructor(scene) {
+    this.scene = scene;
+    this.pivot;
     this.heart = this.startHeart();
   }
   
   startHeart() {
+    debugger
     var x = 0, y = 0;
     var heartShape = new THREE.Shape();
 
@@ -21,16 +24,18 @@ export default class Heart {
     var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     var mesh = new THREE.Mesh( geometry, material ) ;
     material.side = THREE.DoubleSide;
-    var center = new THREE.Vector3();
-    mesh.geometry.computeBoundingBox();
-    mesh.geometry.boundingBox.getCenter(center);
-    mesh.geometry.center();
-    mesh.position.copy(center);
-    // geometry.center();
-    return mesh;
+
+    var box = new THREE.Box3().setFromObject(mesh);
+    box.getCenter(mesh.position); // this re-sets the mesh position
+    mesh.position.multiplyScalar( - 1 );
+    this.pivot = new THREE.Group();
+    debugger
+    this.scene.add(this.pivot);
+    this.pivot.add(mesh);
+    return this.pivot;
   }
 
   drawHeart() {
-    this.heart.rotation.y += 0.05;
+    this.pivot.rotation.y += 0.05;
   }
 }
