@@ -5,5 +5,10 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      'THREE': require.resolve('three')
+    })
+  ]
 };
