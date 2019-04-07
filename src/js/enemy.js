@@ -43,6 +43,7 @@ export default class Enemy {
       this.enemy.scene.position.x += this.changeX;
       this.enemy.scene.position.y += this.changeY;
       this.word.updatePos(this.enemy.scene.position);
+      return this.enemy.scene.position.z > this.playerPos.z * 1.15
     }
   }
 

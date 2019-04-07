@@ -44,8 +44,12 @@ export default class Enemies {
     }
 
     updateEnemy() {
+        let hit = false;
         this.enemies.forEach((enemy) => {
-            enemy.updatePos();
+            if (enemy.updatePos()) {
+                hit = true;
+            }
         });
+        return hit;
     }
 }

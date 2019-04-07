@@ -21,6 +21,7 @@ export default class Heart {
     loader.load('src/models/heart/scene.gltf', (gltf) => {
       gltf.scene.children[0].scale.set(.1, .1, .1 );
       gltf.scene.position.set(62 + 11 * this.index , -45, -100);
+      gltf.scene.name = `${this.index}`
       this.scene.add(gltf.scene);
 
       const spotlight = new THREE.PointLight(0xffffff);
@@ -30,9 +31,7 @@ export default class Heart {
 
       this.heart = gltf.scene.children[0];
     }, undefined, function (error) {
-
       console.error(error);
-
     });
 
     // var heartShape = new THREE.Shape();
