@@ -1,16 +1,16 @@
 import Heart from './heart';
 
 export default class Hearts {
-  constructor(scene, player) {
+  constructor(scene, health) {
     this.hearts = [];
     this.scene = scene;
-    this.player = player;
+    this.health = health;
 
     this.spawnHearts();
   }
 
   spawnHearts() {
-    for (let i = 0; i < this.player.health; i++) {
+    for (let i = 0; i < this.health; i++) {
       let heart = new Heart(this.scene, i);
       this.hearts.push(heart)
     }

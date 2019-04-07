@@ -15,7 +15,6 @@ export default class Game {
     this.enemyStartPos = -50;
     this.camera.position.z = 0;
     this.player = new Player(this.scene, this.playerPosition);
-    this.hearts = new Hearts(this.scene, this.player);
     this.enemies = new Enemies(this.scene, this.speed, this.fieldOfView, this.enemyStartPos, this.playerPosition);
     this.starfield = new Starfield(this.scene);
     // this.keyHandler = new KeyHandler(this.enemies);
@@ -31,8 +30,11 @@ export default class Game {
   }
 
   update() {
-    this.hearts.drawHearts();
-    this.enemies.updateEnemy();
+    this.player.update();
+    let isHit = this.enemies.updateEnemy();
+    if (isHit) {
+      this.player.isHit();
+    }
     this.starfield.animateStars();
     requestAnimationFrame(this.animate.bind(this));
   }

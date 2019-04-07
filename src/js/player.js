@@ -1,4 +1,5 @@
 import 'three/examples/js/loaders/GLTFLoader';
+import Hearts from './hearts';
 
 export default class Player {
   constructor(scene, playerPos) {
@@ -6,14 +7,22 @@ export default class Player {
     this.health = 3;
     this.playerPos = playerPos;
     this.startShip();
+    this.hearts = new Hearts(this.scene, this.health);
   }
 
   isHit() {
     this.health--;
+    this.hearts.health--;
+    const object = this.scene.getObjectByName(`${this.health}`);
+    this.scene.remove(object);
   }
 
   gameOver() {
     this.health === 0;
+  }
+
+  update() {
+    this.hearts.drawHearts();
   }
 
   startShip() {

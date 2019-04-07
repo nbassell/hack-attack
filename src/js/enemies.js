@@ -31,7 +31,7 @@ export default class Enemies {
             let position = this.positions[random]
             let enemy = new Enemy(position, this.scene, this.speed, this.playerPos)
             this.enemies.push(enemy);
-        }, 500);
+        }, 2000);
     }
 
     deleteEnemy() {
@@ -40,8 +40,12 @@ export default class Enemies {
     }
 
     updateEnemy() {
+        let hit = false;
         this.enemies.forEach((enemy) => {
-            enemy.updatePos();
+            if (enemy.updatePos()) {
+                hit = true;
+            }
         });
+        return hit;
     }
 }
