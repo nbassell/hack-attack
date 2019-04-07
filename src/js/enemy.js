@@ -32,6 +32,7 @@ export default class Enemy {
     enemy.scene.position.y = this.position.y;
     enemy.scene.position.z = this.position.z;
     enemy.scene.name = this.word.word;
+    enemy.scene.lookAt( 0, 0, 20);
     this.scene.add(enemy.scene);
     enemy.scene.children[0].scale.set(.005, .005, .005);
     this.enemy = enemy;
