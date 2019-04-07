@@ -1,5 +1,6 @@
 // import * as THREE from 'three';
 import 'three/examples/js/loaders/GLTFLoader';
+import { SpotLightHelper } from 'three';
 
 export default class Heart {
   constructor(scene) {
@@ -14,9 +15,11 @@ export default class Heart {
     var loader = new THREE.GLTFLoader();
 
     loader.load('src/models/player/scene.gltf', (ship) => {
-      ship.scene.rotation.x = 20;
-      ship.scene.position.z = -2.5;
-      ship.scene.position.y = 3;
+      ship.scene.rotation.y = 3.15;
+      // ship.scene.rotation.z = -1;
+      // ship.scene.rotation.x = -10;
+      ship.scene.position.z = -10;
+      ship.scene.position.y = -5;
       return this.scene.add(ship.scene);
 
     }, undefined, function (error) {
