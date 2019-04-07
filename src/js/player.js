@@ -43,13 +43,11 @@ export default class Player {
       ship.scene.position.z = this.playerPos.z;
       ship.scene.position.z = this.playerPos.z;
       ship.scene.position.y = this.playerPos.y;
-
       this.ship = ship.scene.children[0];
 
       return this.scene.add(ship.scene);
 
     }, undefined, function (error) {
-
       console.error(error);
     });
   }
