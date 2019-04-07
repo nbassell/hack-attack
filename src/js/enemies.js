@@ -26,7 +26,6 @@ export default class Enemies {
     }
 
     spawnEnemies() {
-        console.log(this.positions)
         setInterval(() => {
             let random = Math.floor(Math.random() * this.positions.length);
             let position = this.positions[random]
@@ -41,7 +40,6 @@ export default class Enemies {
 
         this.scene.remove(object);
         this.scene.remove(object2);
-
 
         this.enemies.delete(enemy);
     }
