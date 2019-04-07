@@ -2,3 +2,4 @@
 /dist/main.js
 
 .DS_Store
+package-lock.json
