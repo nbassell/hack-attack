@@ -5,12 +5,12 @@ class TrieNode {
     this.letter = letter;
     this.isWord = false;
     this.children = {};
-    this.enemies = new Set();
+    this.enemy;
   }
 }
 
 class Trie {
-  constructor(enemies) {
+  constructor() {
     this.root = new TrieNode(null);
   }
 
@@ -22,18 +22,16 @@ class Trie {
     let currentNode = this.root;
     const word = wordNode.word;
 
-    // const wordNode = enemy.word;
 
     for (let letter of word) {
       if (!currentNode.children[letter]) {
         currentNode.children[letter] = new TrieNode(letter);
-        // currentNode.words.add(wordNode);
       }
       currentNode = currentNode.children[letter];
-      currentNode.enemies.add(enemy);
     }
-
+    
     currentNode.isWord = true;
+    currentNode.enemy = enemy;
 
     return this.root;
   }
@@ -50,8 +48,8 @@ class Trie {
     }
 
     if (currentNode.isWord) {
+      this.enemies.deleteEnemy(currentNode.enemy, word);
       this.delete(word);
-      this.enemies.removeEnemy(deleteEnemy);
     }
   }
 

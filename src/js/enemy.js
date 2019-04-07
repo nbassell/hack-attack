@@ -17,12 +17,13 @@ export default class Enemy {
   }
   
   startEnemy() {
+    this.word = new Word(this.scene, this.position);
+
     var loader = new THREE.GLTFLoader();
     loader.load('src/models/enemy/scene.gltf', this.setEnemy, undefined, function (error) {
       console.error(error);
     });
 
-    this.word = new Word(this.scene, this.position)
     this.trie.insert(this.word, self);
   }
 
@@ -30,6 +31,7 @@ export default class Enemy {
     enemy.scene.position.x = this.position.x;
     enemy.scene.position.y = this.position.y;
     enemy.scene.position.z = this.position.z;
+    enemy.scene.name = this.word.word;
     this.scene.add(enemy.scene);
     enemy.scene.children[0].scale.set(.005, .005, .005);
     this.enemy = enemy;

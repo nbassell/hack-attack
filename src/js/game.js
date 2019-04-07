@@ -30,8 +30,7 @@ export default class Game {
 
   checkGuess() {
     if (this.trie.contains(this.keyHandler.guess)) this.keyHandler.guess = "";
-    const potentialWords = this.trie.find(this.keyHandler.guess); 
-    
+    const potentialWords = this.trie.find(this.keyHandler.guess);   
   }
 
   animate() {
@@ -43,6 +42,7 @@ export default class Game {
     this.hearts.drawHearts();
     this.enemies.updateEnemy();
     this.starfield.animateStars();
+    this.checkGuess();
     requestAnimationFrame(this.animate.bind(this));
   }
 }

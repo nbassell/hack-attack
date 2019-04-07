@@ -35,9 +35,12 @@ export default class Enemies {
         }, 1000);
     }
 
-    deleteEnemy(enemy) {
-        this.scene.remove(enemy.enemy);
-        this.enemies = this.enemies.delete(enemy);
+    deleteEnemy(enemy, word) {
+        const object = this.scene.getObjectByName(word);
+        this.scene.remove(object);
+
+        this.enemies.delete(enemy);
+        // debugger
     }
 
     updateEnemy() {
