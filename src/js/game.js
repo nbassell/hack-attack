@@ -7,11 +7,12 @@ export default class Game {
   constructor() {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(230, window.innerWidth / window.innerHeight, 0.1, 1000);
-    this.camera.position.z = 50;
+    this.playerPos = 50;
+    this.camera.position.z = this.playerPos;
     this.player = new Player();
     this.heart = new Heart();
     this.scene.add(this.heart.heart);
-    this.enemies = new Enemies(this.scene);
+    this.enemies = new Enemies(this.scene, this.playerPos);
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.scene.background = new THREE.Color( 0x000000 );
