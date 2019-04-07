@@ -1,22 +1,35 @@
 import Enemy from './enemy';
 
 export default class Enemies {
-    constructor(scene, speed) {
+    constructor(scene, speed, view) {
         this.enemies = [];
         this.speed = speed;
-        this.positions = [[-180,-30], [-150,-50], [-120,-70], [-90, -70], [-60,-70], [-30,-70], [0,-70],
-         [30,-70], [60,-70], [90, -70], [120, -70], [150, -50], [180, -30]]
+        this.view = view;
+        this.positions = this.setPositions();
         this.scene = scene; 
         this.spawnEnemies();
     }
 
+    setPositions() {
+        let positions = []
+        for (let i = 10; i >= -10; i -= 10) {
+            positions.push([this.view-5, i]);
+            positions.push([-1*this.view+5, i]);
+        }
+        for (let i = this.view; i >= this.view*-1; i -= 5) {
+            positions.push([i, Math.floor(this.view/3)])
+        }
+        return positions;
+    }
+
     spawnEnemies() {
+        console.log(this.positions)
         setInterval(() => {
-            let random = Math.floor(Math.random() * 13);
+            let random = Math.floor(Math.random() * this.positions.length);
             let position = this.positions[random]
             let enemy = new Enemy(position, this.scene, this.speed)
             this.enemies.push(enemy);
-        }, 100);
+        }, 1000);
     }
 
     deleteEnemy() {

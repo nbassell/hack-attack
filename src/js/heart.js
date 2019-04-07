@@ -13,9 +13,11 @@ export default class Heart {
 
     var loader = new THREE.GLTFLoader();
 
-    loader.load('src/models/player/scene.gltf', (gltf) => {
-
-      return this.scene.add(gltf.scene);
+    loader.load('src/models/player/scene.gltf', (ship) => {
+      ship.scene.rotation.x = 20;
+      ship.scene.position.z = -2.5;
+      ship.scene.position.y = 3;
+      return this.scene.add(ship.scene);
 
     }, undefined, function (error) {
 
