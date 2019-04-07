@@ -2,11 +2,12 @@ import 'three/examples/js/loaders/GLTFLoader';
 import Hearts from './hearts';
 
 export default class Player {
-  constructor(scene, playerPos) {
+  constructor(scene, playerPos, game) {
     this.scene = scene;
     this.health = 3;
     this.playerPos = playerPos;
-    
+    this.game = game;
+
     this.startShip();
     this.hearts = new Hearts(this.scene, this.health);
   }
@@ -16,10 +17,8 @@ export default class Player {
     this.hearts.health--;
     const object = this.scene.getObjectByName(`${this.health}`);
     this.scene.remove(object);
-  }
 
-  gameOver() {
-    this.health === 0;
+    if(this.health <= 0) this.game.gameOver();
   }
 
   update() {

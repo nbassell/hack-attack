@@ -10,8 +10,6 @@ export default class Enemies {
     this.positions = this.setPositions();
     this.scene = scene;
     this.trie = trie;
-
-    this.spawnEnemies();
   }
 
   cancelColor() {
@@ -45,6 +43,15 @@ export default class Enemies {
       let enemy = new Enemy(position, this.scene, this.speed, this.playerPos, this.trie);
       this.enemies.add(enemy);
     }, 2000 / this.difficulty);
+  }
+
+  stopSpawning() {
+    clearInterval(this.difficultyInterval);
+    clearInterval(this.interval);
+
+    this.enemies.forEach(enemy => {
+      this.deleteEnemy(enemy, enemy.word.word)
+    })
   }
 
   deleteEnemy(enemy, word) {

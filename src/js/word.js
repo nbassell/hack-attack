@@ -6,7 +6,7 @@ class Word {
     this.position = position;
     this.word = dictionary[Math.floor(Math.random() * dictionary.length)];
     this.createText = this.createText.bind(this);
-    this. offset = { x : this.word.length/2, y: 1.5 , z: 0.5 }
+    this.offset = { x : this.word.length/2, y: 1.5 , z: 0.5 }
     this.startWord();
   }
 

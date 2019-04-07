@@ -8,6 +8,7 @@ import KeyHandler from './key_handler';
 
 export default class Game {
   constructor() {
+    this.playing = false;
     this.fieldOfView = 50;
     this.camera = new THREE.PerspectiveCamera(this.fieldOfView, window.innerWidth / window.innerHeight, 0.1, 1000);
     this.scene = new THREE.Scene();
@@ -15,12 +16,12 @@ export default class Game {
     this.playerPosition = {x: 0, y: -5, z: -10};
     this.enemyStartPos = -50;
     this.camera.position.z = 0;
-    this.player = new Player(this.scene, this.playerPosition);
+    this.player = new Player(this.scene, this.playerPosition, this);
     this.trie = new Trie();
     this.enemies = new Enemies(this.scene, this.speed, this.fieldOfView, this.enemyStartPos, this.playerPosition, this.trie);
     this.trie.addEnemies(this.enemies);
     this.starfield = new Starfield(this.scene);
-    this.keyHandler = new KeyHandler(this.enemies);
+    this.keyHandler = new KeyHandler(this.enemies, this);
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.scene.background = new THREE.Color(0x000000);
@@ -34,6 +35,24 @@ export default class Game {
     })  
 
     if (this.trie.contains(this.keyHandler.guess)) this.keyHandler.clearGuess();
+  }
+
+  gameOver() {
+    this.playing = false;
+    this.enemies.stopSpawning();
+
+    document.getElementById('game-over').innerHTML = 'GAME OVER';
+
+    document.getElementById('directions').classList.add('visible');
+    document.getElementById('game-over').classList.add('visible');
+  }
+
+  startGame() {
+    this.playing = true;
+    this.enemies.spawnEnemies();
+
+    document.getElementById('game-over').classList.remove('visible');
+    document.getElementById('directions').classList.remove('visible');
   }
 
   animate() {
