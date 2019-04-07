@@ -1,26 +1,22 @@
 import Enemy from './enemy'
 
 export default class Enemies {
-    constructor(scene, target) {
+    constructor(scene, speed) {
         this.enemies = [];
-        this.target = target;
-        this.positions = [[-175,-30], [-150,-50], [-100,-70], [-70, -70], [-40,-70], [-10,-70], [20,-70],
-         [50,-70], [80,-70], [110, -70], [150, -50], [175, -30]]
+        this.speed = speed;
+        this.positions = [[-180,-30], [-150,-50], [-120,-70], [-90, -70], [-60,-70], [-30,-70], [0,-70],
+         [30,-70], [60,-70], [90, -70], [120, -70], [150, -50], [175, -30]]
         this.scene = scene;
         this.spawnEnemies();
     }
 
     spawnEnemies() {
         setInterval(() => {
-            let random = Math.floor(Math.random() * 12);
+            let random = Math.floor(Math.random() * 13);
             let position = this.positions[random]
-            let enemy = new Enemy(position, this.scene, this.target)
+            let enemy = new Enemy(position, this.scene, this.speed)
             this.enemies.push(enemy);
         }, 1000);
-        // for (let i = 0; i < this.positions.length; i++) {
-        //     let enemy = new Enemy(this.positions[i], this.scene);
-        //     this.enemies.push(enemy);
-        // }
     }
 
     updateEnemy() {
