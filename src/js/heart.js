@@ -28,11 +28,8 @@ export default class Heart {
     box.getCenter(mesh.position); // this re-sets the mesh position
     mesh.position.multiplyScalar( - 1 );
     this.pivot = new THREE.Group();
-    this.scene.add(this.pivot);
     this.pivot.add(mesh);
-
-    this.pivot.position.set(-100,100,-200)
-    
+    this.scene.add(this.pivot);
     return this.pivot;
   }
 
