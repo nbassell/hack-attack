@@ -9,7 +9,7 @@ export default class Enemy {
     this.playerPos = playerPos;
     this.changeX = -1*(this.position[0]/this.speed);
     this.changeY = -1*((this.position[1]-this.playerPos[1])/this.speed);
-    this.changeZ = (this.position[2]-this.playerPos[2]) / this.speed;
+    this.changeZ = -1*(this.position[2]-this.playerPos[2]) / this.speed;
     
     this.setEnemy = this.setEnemy.bind(this);
     this.startEnemy();
@@ -34,7 +34,7 @@ export default class Enemy {
 
   updatePos() {
     if (this.enemy) {
-      this.enemy.scene.position.z += 50/this.speed;
+      this.enemy.scene.position.z += this.changeZ;
       this.enemy.scene.position.x += this.changeX;
       this.enemy.scene.position.y += this.changeY;
     }
