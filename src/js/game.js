@@ -10,7 +10,7 @@ export default class Game {
     this.playerPos = 50;
     this.camera.position.z = this.playerPos;
     this.player = new Player(this.scene);
-    this.heart = new Heart(this.scene);
+    this.heart = new Heart(this.scene, this.player);
     this.enemies = new Enemies(this.scene, this.playerPos);
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
