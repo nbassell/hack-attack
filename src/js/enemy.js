@@ -1,4 +1,3 @@
-// import * as THREE from 'three';
 import 'three/examples/js/loaders/GLTFLoader';
 
 export default class Enemy {

@@ -1,7 +1,8 @@
-import * as THREE from 'three';
+// import * as THREE from 'three';
 import Player from './player';
 import Hearts from './hearts';
 import Enemies from './enemies';
+import Starfield from './starfield';
 import KeyHandler from './key_handler';
 
 export default class Game {
@@ -16,6 +17,7 @@ export default class Game {
     this.player = new Player(this.scene, this.playerPosition);
     this.hearts = new Hearts(this.scene, this.player);
     this.enemies = new Enemies(this.scene, this.speed, this.fieldOfView, this.enemyStartPos, this.playerPosition);
+    this.starfield = new Starfield(this.scene);
     // this.keyHandler = new KeyHandler(this.enemies);
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -31,6 +33,7 @@ export default class Game {
   update() {
     this.hearts.drawHearts();
     this.enemies.updateEnemy();
+    this.starfield.animateStars();
     requestAnimationFrame(this.animate.bind(this));
   }
 }
