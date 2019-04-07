@@ -1,8 +1,10 @@
 import Enemy from './enemy';
+import Bullet from './bullet';
 
 export default class Enemies {
     constructor(scene, speed, view, startPos, playerPos, trie) {
         this.enemies = new Set();
+        this.bullets = [];
         this.speed = speed;
         this.startPos = startPos;
         this.playerPos = playerPos;
@@ -40,8 +42,14 @@ export default class Enemies {
 
         this.scene.remove(object);
         this.scene.remove(object2);
-
+        
         this.enemies.delete(enemy);
+    }
+
+    killEnemy(enemy, word) {
+        const bullet = new Bullet(this.scene, this.playerPos, enemy.enemy.scene.position, this.speed);
+        this.bullets.push(bullet);
+        this.deleteEnemy(enemy, word);
     }
 
     updateEnemy() {
@@ -52,6 +60,11 @@ export default class Enemies {
                 this.deleteEnemy(enemy, enemy.word.word);
             }
         });
+
+        this.bullets.forEach(bullet => {
+            bullet.updatePos();
+        })
+
         return hit;
     }
 }
