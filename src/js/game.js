@@ -7,7 +7,7 @@ export default class Game {
   constructor() {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(230, window.innerWidth / window.innerHeight, 0.1, 1000);
-    this.speed = 200;
+    this.speed = 300;
     this.camera.position.z = 50;
     this.player = new Player(this.scene);
     this.heart = new Heart(this.scene);

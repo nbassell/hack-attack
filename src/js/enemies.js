@@ -5,8 +5,8 @@ export default class Enemies {
         this.enemies = [];
         this.speed = speed;
         this.positions = [[-180,-30], [-150,-50], [-120,-70], [-90, -70], [-60,-70], [-30,-70], [0,-70],
-         [30,-70], [60,-70], [90, -70], [120, -70], [150, -50], [175, -30]]
-        this.scene = scene;
+         [30,-70], [60,-70], [90, -70], [120, -70], [150, -50], [180, -30]]
+        this.scene = scene; 
         this.spawnEnemies();
     }
 
@@ -16,7 +16,7 @@ export default class Enemies {
             let position = this.positions[random]
             let enemy = new Enemy(position, this.scene, this.speed)
             this.enemies.push(enemy);
-        }, 1000);
+        }, 2000);
     }
 
     updateEnemy() {
