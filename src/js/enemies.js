@@ -36,8 +36,8 @@ export default class Enemies {
     this.difficulty = 1;
 
     this.difficultyInterval = setInterval(() => {
-      difficulty *= 1.2;
-    }, 5000);
+      this.difficulty *= 1.2;
+    }, 8000);
 
     this.interval = setInterval(() => {
       let random = Math.floor(Math.random() * this.positions.length);
