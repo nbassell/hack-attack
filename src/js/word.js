@@ -29,7 +29,7 @@ class Word {
       bevelThickness: 0.1,
     });
 
-    var textMaterial = new THREE.MeshPhongMaterial( { color: 0xff0000 } );
+    var textMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 } );
 
     var mesh = new THREE.Mesh( textGeo, textMaterial );
     mesh.position.set(this.position.x - this.offset.x, this.position.y - this.offset.y, this.position.z - this.offset.z);

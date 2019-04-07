@@ -20,7 +20,7 @@ export default class Game {
     this.enemies = new Enemies(this.scene, this.speed, this.fieldOfView, this.enemyStartPos, this.playerPosition, this.trie);
     this.trie.addEnemies(this.enemies);
     this.starfield = new Starfield(this.scene);
-    this.keyHandler = new KeyHandler();
+    this.keyHandler = new KeyHandler(this.enemies);
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.scene.background = new THREE.Color(0x000000);
@@ -28,10 +28,12 @@ export default class Game {
   }
 
   checkGuess() {
-    if (this.trie.contains(this.keyHandler.guess)) {
-      this.keyHandler.clearGuess();
-    };
-    const potentialWords = this.trie.find(this.keyHandler.guess);   
+    const targets = this.trie.find(this.keyHandler.guess); 
+    targets.forEach(target => {
+      if (target.word.text) target.word.text.material.color.setHex(0xffff00);
+    })  
+
+    if (this.trie.contains(this.keyHandler.guess)) this.keyHandler.clearGuess();
   }
 
   animate() {

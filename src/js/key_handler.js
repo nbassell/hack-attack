@@ -1,6 +1,7 @@
 class KeyHandler {
-  constructor() {
+  constructor(enemies) {
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.enemies = enemies;
     this.guess = "";
     window.onkeydown = this.handleKeyDown;
   }
@@ -18,8 +19,8 @@ class KeyHandler {
       this.guess += e.key;
     } else if ( e.keyCode === 32) {
       // Spacebar
+      this.enemies.cancelColor();
       this.clearGuess();
-
     } else if ( e.keyCode === 27) {
       // Escape
 

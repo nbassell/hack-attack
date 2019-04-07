@@ -49,6 +49,7 @@ class Trie {
 
     if (currentNode.isWord) {
       this.enemies.deleteEnemy(currentNode.enemy, word);
+      this.enemies.cancelColor();
       this.delete(word);
       return true;
     }
@@ -61,11 +62,22 @@ class Trie {
       if (currentNode.children[letter]) {
         currentNode = currentNode.children[letter];
       } else {
-        return {};
+        this.enemies.cancelColor();
       }
     }
 
-    return currentNode.children;
+    if (currentNode.letter === null) return [];
+
+    const queue = [currentNode];
+    const targets = [];
+
+    while (queue.length > 0) {
+      const node = queue.shift();
+      if (node.isWord) targets.push(node.enemy);
+      for (let letter in node.children) queue.push(node.children[letter]);
+    }
+
+    return targets;
   }
 
   delete(word) {

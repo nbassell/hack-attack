@@ -24,7 +24,7 @@ export default class Enemy {
       console.error(error);
     });
 
-    this.trie.insert(this.word, self);
+    this.trie.insert(this.word, this);
   }
 
   setEnemy(enemy) {

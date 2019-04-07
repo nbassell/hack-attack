@@ -6,6 +6,7 @@ export default class Player {
     this.scene = scene;
     this.health = 3;
     this.playerPos = playerPos;
+    
     this.startShip();
     this.hearts = new Hearts(this.scene, this.health);
   }
