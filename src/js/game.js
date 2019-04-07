@@ -12,7 +12,7 @@ export default class Game {
     this.speed = 200;
     this.camera.position.z = 0;
     this.player = new Player(this.scene);
-    this.heart = new Heart(this.scene);
+    this.hearts = new Hearts(this.scene, this.player);
     this.enemies = new Enemies(this.scene, this.speed, this.fieldOfView);
     // this.keyHandler = new KeyHandler(this.enemies);
     this.renderer = new THREE.WebGLRenderer();
