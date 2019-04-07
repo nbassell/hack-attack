@@ -55,6 +55,10 @@ export default class Enemies {
     this.enemies.forEach(enemy => {
       this.deleteEnemy(enemy, enemy.word.word)
     })
+
+    this.bullets.forEach(bullet => {
+        this.deleteBullet(bullet);
+      })
   }
 
   deleteEnemy(enemy, word) {
