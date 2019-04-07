@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export default class Enemey {
+export default class Enemy {
   constructor(position, scene, speed) {
     this.position = position;
     this.scene = scene;

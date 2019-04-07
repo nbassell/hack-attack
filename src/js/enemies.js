@@ -1,4 +1,4 @@
-import Enemy from './enemy'
+import Enemy from './enemy';
 
 export default class Enemies {
     constructor(scene, speed) {
@@ -16,7 +16,12 @@ export default class Enemies {
             let position = this.positions[random]
             let enemy = new Enemy(position, this.scene, this.speed)
             this.enemies.push(enemy);
-        }, 2000);
+        }, 100);
+    }
+
+    deleteEnemy() {
+        this.scene.remove(this.enemies[0].enemy);
+        this.enemies = this.enemies.splice(1);
     }
 
     updateEnemy() {
