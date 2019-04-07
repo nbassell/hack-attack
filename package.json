@@ -4,7 +4,9 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --content-base"
+    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --content-base",
+    "build": "webpack",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
