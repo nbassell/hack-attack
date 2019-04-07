@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 
 export default class Enemey {
-  constructor(position, scene, target) {
+  constructor(position, scene, speed) {
     this.position = position;
     this.scene = scene;
-    this.target = target;
-    this.changeX = -1*(this.position[0]/100);
-    this.changeY = -1*(this.position[1]/100)
+    this.speed = speed;
+    this.changeX = -1*(this.position[0]/this.speed);
+    this.changeY = -1*(this.position[1]/this.speed)
     this.enemy = this.startEnemy();
   }
   
@@ -17,7 +17,7 @@ export default class Enemey {
     //   this.scene.add(object);
     // });
 
-    var geometry = new THREE.BoxBufferGeometry(1, 1, 3);
+    var geometry = new THREE.BoxBufferGeometry(1, 1, 0.5);
     var material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
     var object = new THREE.Mesh( geometry, material );
     object.position.x = this.position[0];
@@ -28,7 +28,7 @@ export default class Enemey {
   }
 
   updatePos() {
-    this.enemy.position.z += 0.5;
+    this.enemy.position.z += 50/this.speed;
     this.enemy.position.x += this.changeX;
     this.enemy.position.y += this.changeY;
   }
