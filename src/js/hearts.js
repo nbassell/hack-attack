@@ -10,7 +10,10 @@ export default class Hearts {
 
   spawnHearts() {
     for (let i = 0; i < this.player.health; i++) {
-      
+      let heart = new Heart(this.scene);
+      this.hearts.push(heart);
     }
   }
+
+  
 }
