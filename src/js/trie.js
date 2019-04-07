@@ -1,3 +1,5 @@
+import Word from "./word";
+
 class TrieNode {
   constructor(letter) {
     this.letter = letter;
@@ -20,9 +22,12 @@ class Trie {
     let currentNode = this.root;
     const word = wordNode.word;
 
+    // const wordNode = enemy.word;
+
     for (let letter of word) {
       if (!currentNode.children[letter]) {
         currentNode.children[letter] = new TrieNode(letter);
+        // currentNode.words.add(wordNode);
       }
       currentNode = currentNode.children[letter];
       currentNode.enemies.add(enemy);
@@ -48,6 +53,20 @@ class Trie {
       this.delete(word);
       this.enemies.removeEnemy(deleteEnemy);
     }
+  }
+
+  find(prefix) {
+    let currentNode = this.root;
+
+    for(let letter of prefix) {
+      if (currentNode.children[letter]) {
+        currentNode = currentNode.children[letter];
+      } else {
+        return {};
+      }
+    }
+
+    return currentNode.children;
   }
 
   delete(word) {
