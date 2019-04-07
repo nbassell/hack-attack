@@ -18,7 +18,7 @@ export default class Enemy {
   startEnemy() {
 
     var loader = new THREE.GLTFLoader();
-    return loader.load('src/models/player/scene.gltf', this.setEnemy, undefined, function (error) {
+    loader.load('src/models/enemy/scene.gltf', this.setEnemy, undefined, function (error) {
       console.error(error);
     });
   }
@@ -29,6 +29,7 @@ export default class Enemy {
     enemy.scene.position.y = this.position.y;
     enemy.scene.position.z = this.position.z;
     this.scene.add(enemy.scene);
+    enemy.scene.children[0].scale.set(.005, .005, .005);
     this.enemy = enemy;
   }
 
