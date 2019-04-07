@@ -20,7 +20,6 @@ export default class Game {
     document.body.appendChild(this.renderer.domElement);
   }
 
-
   animate() {
     this.renderer.render(this.scene, this.camera);
     this.update();
