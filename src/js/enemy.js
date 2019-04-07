@@ -1,4 +1,5 @@
-import * as THREE from 'three';
+// import * as THREE from 'three';
+import 'three/examples/js/loaders/GLTFLoader';
 
 export default class Enemy {
   constructor(position, scene, speed) {
@@ -7,39 +8,43 @@ export default class Enemy {
     this.speed = speed;
     this.changeX = -1*(this.position[0]/this.speed);
     this.changeY = -1*(this.position[1]/this.speed)
-    this.enemy = this.startEnemy();
+    
+    this.setEnemy = this.setEnemy.bind(this);
+    this.startEnemy();
   }
   
   startEnemy() {
 
-    // var loader = new THREE.ObjectLoader();
-    // var object = loader.load( 'models/enemy.json', (object) => {
-    //   this.scene.add(object);
-    // });
+    var loader = new THREE.GLTFLoader();
+    return loader.load('src/models/player/scene.gltf', this.setEnemy, undefined, function (error) {
+      console.error(error);
+    });
 
-    var geometry = new THREE.BoxBufferGeometry(1, 1, 0.5);
-    var material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-    var object = new THREE.Mesh( geometry, material );
-    object.position.x = this.position[0];
-    object.position.y = this.position[1];
-    this.scene.add(object);
-    console.log(object.position.z);
-    return object;
+    // var geometry = new THREE.BoxBufferGeometry(1, 1, 0.5);
+    // var material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+    // var object = new THREE.Mesh( geometry, material );
+    // object.position.x = this.position[0];
+    // object.position.y = this.position[1];
+    // object.position.z = -54;
+    // this.scene.add(object);
+    // return object;
+  }
+
+  setEnemy(enemy) {
+    enemy.scene.position.x
+    enemy.scene.position.x = this.position[0];
+    enemy.scene.position.y = this.position[1];
+    enemy.scene.position.z = -54;
+    this.scene.add(enemy.scene);
+    this.enemy = enemy;
   }
 
   updatePos() {
-    this.enemy.position.z += 50/this.speed;
-    this.enemy.position.x += this.changeX;
-    this.enemy.position.y += this.changeY;
+    if (this.enemy) {
+      this.enemy.scene.position.z += 50/this.speed;
+      this.enemy.scene.position.x += this.changeX;
+      this.enemy.scene.position.y += this.changeY;
+    }
   }
 
-  toZero(num) {
-    // if (num > 0) {
-    //   return num < 1 ? 0 : num - .7;
-    // } else {
-    //   return num > -1 ? 0 : num + .7;
-    // }
-    let change = 0.5 / 50;
-
-  }
 }
