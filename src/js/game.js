@@ -28,7 +28,9 @@ export default class Game {
   }
 
   checkGuess() {
-    if (this.trie.contains(this.keyHandler.guess)) this.keyHandler.guess = "";
+    if (this.trie.contains(this.keyHandler.guess)) {
+      this.keyHandler.clearGuess();
+    };
     const potentialWords = this.trie.find(this.keyHandler.guess);   
   }
 

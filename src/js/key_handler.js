@@ -5,6 +5,10 @@ class KeyHandler {
     window.onkeydown = this.handleKeyDown;
   }
 
+  clearGuess() {
+    this.guess = "";
+  }
+
   handleKeyDown(e) {
     e.preventDefault();
 
@@ -14,12 +18,14 @@ class KeyHandler {
       this.guess += e.key;
     } else if ( e.keyCode === 32) {
       // Spacebar
+      this.clearGuess();
+
     } else if ( e.keyCode === 27) {
       // Escape
 
     } else if ( e.keyCode === 15) {
       // Enter
-      this.guess = "";
+      this.clearGuess();
     }
   }
 }

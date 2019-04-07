@@ -50,6 +50,7 @@ class Trie {
     if (currentNode.isWord) {
       this.enemies.deleteEnemy(currentNode.enemy, word);
       this.delete(word);
+      return true;
     }
   }
 
