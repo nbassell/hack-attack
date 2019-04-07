@@ -34,7 +34,7 @@ class Word {
     var mesh = new THREE.Mesh( textGeo, textMaterial );
     mesh.position.set(this.position.x - this.offset.x, this.position.y - this.offset.y, this.position.z - this.offset.z);
     mesh.lookAt( 0, 0, 20);
-
+    mesh.name = `${this.word}-word`
     this.scene.add( mesh );
     this.text = mesh;
   }

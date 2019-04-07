@@ -37,10 +37,13 @@ export default class Enemies {
 
     deleteEnemy(enemy, word) {
         const object = this.scene.getObjectByName(word);
+        const object2 = this.scene.getObjectByName(`${word}-word`);
+
         this.scene.remove(object);
+        this.scene.remove(object2);
+
 
         this.enemies.delete(enemy);
-        // debugger
     }
 
     updateEnemy() {
@@ -48,6 +51,7 @@ export default class Enemies {
         this.enemies.forEach((enemy) => {
             if (enemy.updatePos()) {
                 hit = true;
+                this.deleteEnemy(enemy, enemy.word.word);
             }
         });
         return hit;
