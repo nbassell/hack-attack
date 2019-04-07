@@ -29,7 +29,7 @@ export default class Enemies {
             let position = this.positions[random]
             let enemy = new Enemy(position, this.scene, this.speed)
             this.enemies.push(enemy);
-        }, 1000);
+        }, 500);
     }
 
     deleteEnemy() {
