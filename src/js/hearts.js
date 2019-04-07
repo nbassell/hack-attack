@@ -5,8 +5,6 @@ export default class Hearts {
     this.hearts = [];
     this.scene = scene;
     this.health = health;
-
-    this.spawnHearts();
   }
 
   spawnHearts() {

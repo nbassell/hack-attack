@@ -22,6 +22,12 @@ export default class Player {
     if (this.health <= 0) this.game.gameOver();
   }
 
+  restartHealth() {
+    this.health = 3;
+    this.hearts.health = 3;
+    this.hearts.spawnHearts();
+  }
+
   update() {
     this.hearts.drawHearts();
     if (this.ship) {

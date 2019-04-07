@@ -49,6 +49,7 @@ export default class Game {
 
   startGame() {
     this.playing = true;
+    this.player.restartHealth(); 
     this.enemies.spawnEnemies();
 
     document.getElementById('game-over').classList.remove('visible');
