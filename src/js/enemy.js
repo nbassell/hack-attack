@@ -7,9 +7,9 @@ export default class Enemy {
     this.scene = scene;
     this.speed = speed;
     this.playerPos = playerPos;
-    this.changeX = -1*(this.position[0]/this.speed);
-    this.changeY = -1*((this.position[1]-this.playerPos[1])/this.speed);
-    this.changeZ = -1*(this.position[2]-this.playerPos[2]) / this.speed;
+    this.changeX = -1 * (this.position.x / this.speed);
+    this.changeY = -1 * ((this.position.y - this.playerPos.y) / this.speed);
+    this.changeZ = -1 * (this.position.z - this.playerPos.z) / this.speed;
     
     this.setEnemy = this.setEnemy.bind(this);
     this.startEnemy();
@@ -25,9 +25,9 @@ export default class Enemy {
 
   setEnemy(enemy) {
     enemy.scene.position.x
-    enemy.scene.position.x = this.position[0];
-    enemy.scene.position.y = this.position[1];
-    enemy.scene.position.z = this.position[2];
+    enemy.scene.position.x = this.position.x;
+    enemy.scene.position.y = this.position.y;
+    enemy.scene.position.z = this.position.z;
     this.scene.add(enemy.scene);
     this.enemy = enemy;
   }

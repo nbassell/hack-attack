@@ -21,8 +21,8 @@ export default class Player {
   
     loader.load('src/models/player/scene.gltf', (ship) => {
       ship.scene.rotation.y = 3.15;
-      ship.scene.position.z = this.playerPos[2];
-      ship.scene.position.y = this.playerPos[1];
+      ship.scene.position.z = this.playerPos.z;
+      ship.scene.position.y = this.playerPos.y;
       return this.scene.add(ship.scene);
   
     }, undefined, function (error) {

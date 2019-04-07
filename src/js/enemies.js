@@ -15,11 +15,11 @@ export default class Enemies {
     setPositions() {
         let positions = []
         for (let i = 10; i >= -10; i -= 10) {
-            positions.push([this.view-5, i, this.startPos]);
-            positions.push([-1*this.view+5, i, this.startPos]);
+            positions.push({x: this.view-5, y: i, z: this.startPos});
+            positions.push({x: -1 * this.view + 5, y: i, z: this.startPos});
         }
-        for (let i = this.view; i >= this.view*-1; i -= this.view/10) {
-            positions.push([i, Math.floor(this.view/3), this.startPos])
+        for (let i = this.view; i >= this.view * -1; i -= this.view / 10) {
+            positions.push({x: i, y: Math.floor(this.view / 3), z: this.startPos});
         }
         return positions;
     }
