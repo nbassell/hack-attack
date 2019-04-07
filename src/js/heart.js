@@ -20,8 +20,8 @@ export default class Heart {
     var loader = new THREE.GLTFLoader();
 
     loader.load('src/models/heart/scene.gltf', (gltf) => {
-      gltf.scene.children[0].scale.set(.1, .1, .1);
-      gltf.scene.position.set(103 + 12 * this.index , -65, -100);
+      gltf.scene.children[0].scale.set(.1, .1, .1 );
+      gltf.scene.position.set(62 + 11 * this.index , -45, -100);
       this.scene.add(gltf.scene);
 
       const spotlight = new THREE.SpotLight(0xffffff);
