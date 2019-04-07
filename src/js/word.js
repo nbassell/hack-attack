@@ -12,7 +12,9 @@ class Word {
   }
 
   updatePos(position) {
-    this.text.position.set(position.x - this.offset.x, position.y - this.offset.y , position.z);
+    if (this.text) {
+      this.text.position.set(position.x - this.offset.x, position.y - this.offset.y , position.z);
+    }
   }
 
   startWord() {
@@ -25,12 +27,14 @@ class Word {
       font: font,
       size: 1,
       height: 1,
+      bevelThickness: 0.5,
     });
 
     var textMaterial = new THREE.MeshPhongMaterial( { color: 0xff0000 } );
 
     var mesh = new THREE.Mesh( textGeo, textMaterial );
     mesh.position.set(this.position.x - this.offset.x, this.position.y - this.offset.y, this.position.z);
+    // mesh.rotation.set( this.position.x, this.position.y, this.position.z);
 
     this.scene.add( mesh );
     this.text = mesh;
