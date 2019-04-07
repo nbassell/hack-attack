@@ -39,7 +39,7 @@ export default class Enemies {
       this.difficulty *= 1.2;
     }, 8000);
 
-    this.interval = setInterval(() => {
+    this.spawnInterval = setInterval(() => {
       let random = Math.floor(Math.random() * this.positions.length);
       let position = this.positions[random]
       let enemy = new Enemy(position, this.scene, this.speed, this.playerPos, this.trie);
@@ -49,7 +49,7 @@ export default class Enemies {
 
   stopSpawning() {
     clearInterval(this.difficultyInterval);
-    clearInterval(this.interval);
+    clearInterval(this.spawnInterval);
 
     this.enemies.forEach(enemy => {
       this.deleteEnemy(enemy, enemy.word.word)
@@ -78,14 +78,14 @@ export default class Enemies {
         this.deleteEnemy(enemy, word);
     }
 
-    updateEnemy() {
-        let hit = false;
-        this.enemies.forEach((enemy) => {
-            if (enemy.updatePos()) {
-                hit = true;
-                this.deleteEnemy(enemy, enemy.word.word);
-            }
-        });
+  updateEnemy() {
+    let hit = false;
+    this.enemies.forEach((enemy) => {
+      if (enemy.updatePos()) {
+        hit = true;
+        this.deleteEnemy(enemy, enemy.word.word);
+      }
+    });
 
         this.bullets.forEach(bullet => {
             if (bullet.updatePos()) {
@@ -93,6 +93,6 @@ export default class Enemies {
             }
         })
 
-        return hit;
-    }
+    return hit;
+  }
 }
