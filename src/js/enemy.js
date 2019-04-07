@@ -1,4 +1,5 @@
 import 'three/examples/js/loaders/GLTFLoader';
+import Word from './word';
 
 export default class Enemy {
   constructor(position, scene, speed, playerPos) {
@@ -20,6 +21,8 @@ export default class Enemy {
     loader.load('src/models/enemy/scene.gltf', this.setEnemy, undefined, function (error) {
       console.error(error);
     });
+
+    this.word = new Word(this.scene, this.position)
   }
 
   setEnemy(enemy) {
@@ -37,6 +40,7 @@ export default class Enemy {
       this.enemy.scene.position.z += this.changeZ;
       this.enemy.scene.position.x += this.changeX;
       this.enemy.scene.position.y += this.changeY;
+      this.word.updatePos(this.enemy.scene.position);
     }
   }
 
