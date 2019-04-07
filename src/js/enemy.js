@@ -16,7 +16,6 @@ export default class Enemy {
   }
   
   startEnemy() {
-
     var loader = new THREE.GLTFLoader();
     loader.load('src/models/enemy/scene.gltf', this.setEnemy, undefined, function (error) {
       console.error(error);

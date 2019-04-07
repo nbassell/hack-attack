@@ -7,13 +7,13 @@ class Word {
     this.position = position;
     this.word = dictionary[Math.floor(Math.random() * dictionary.length)];
     this.createText = this.createText.bind(this);
-    this. offset = { x : 2, y: 1 }
+    this. offset = { x : this.word.length/4, y: 1.5, z: 1 }
     this.startWord();
   }
 
   updatePos(position) {
     if (this.text) {
-      this.text.position.set(position.x - this.offset.x, position.y - this.offset.y , position.z);
+      this.text.position.set(position.x - this.offset.x, position.y - this.offset.y , position.z - this.offset.z);
     }
   }
 
@@ -27,14 +27,15 @@ class Word {
       font: font,
       size: 1,
       height: 1,
-      bevelThickness: 0.5,
+      bevelThickness: 0.1,
     });
 
     var textMaterial = new THREE.MeshPhongMaterial( { color: 0xff0000 } );
 
     var mesh = new THREE.Mesh( textGeo, textMaterial );
-    mesh.position.set(this.position.x - this.offset.x, this.position.y - this.offset.y, this.position.z);
-    // mesh.rotation.set( this.position.x, this.position.y, this.position.z);
+    // debugger
+    mesh.position.set(this.position.x - this.offset.x, this.position.y - this.offset.y, this.position.z - this.offset.z);
+    mesh.lookAt( 0, 0, 20);
 
     this.scene.add( mesh );
     this.text = mesh;
