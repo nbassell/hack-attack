@@ -1,8 +1,11 @@
+import Word from "./word";
+
 class TrieNode {
   constructor(letter) {
     this.letter = letter;
     this.isWord = false;
     this.children = {};
+    this.words = new Set();
   }
 }
 
@@ -11,12 +14,15 @@ class Trie {
     this.root = new TrieNode(null);
   }
 
-  insert(word) {
+  insert(word, enemy) {
     let currentNode = this.root;
+
+    // const wordNode = enemy.word;
 
     for (let letter of word) {
       if (!currentNode.children[letter]) {
         currentNode.children[letter] = new TrieNode(letter);
+        // currentNode.words.add(wordNode);
       }
       currentNode = currentNode.children[letter];
     }
@@ -38,6 +44,20 @@ class Trie {
     }
 
     return currentNode.isWord;
+  }
+
+  find(prefix) {
+    let currentNode = this.root;
+
+    for(let letter of prefix) {
+      if (currentNode.children[letter]) {
+        currentNode = currentNode.children[letter];
+      } else {
+        return {};
+      }
+    }
+
+    return currentNode.children;
   }
 
   delete(word) {
