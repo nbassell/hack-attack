@@ -6,14 +6,16 @@ import KeyHandler from './key_handler';
 
 export default class Game {
   constructor() {
-    this.scene = new THREE.Scene();
     this.fieldOfView = 50;
     this.camera = new THREE.PerspectiveCamera(this.fieldOfView, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.scene = new THREE.Scene();
     this.speed = 200;
+    this.playerPosition = [0,-5,-10];
+    this.enemyStartPos = -50;
     this.camera.position.z = 0;
-    this.player = new Player(this.scene);
+    this.player = new Player(this.scene, this.playerPosition);
     this.hearts = new Hearts(this.scene, this.player);
-    this.enemies = new Enemies(this.scene, this.speed, this.fieldOfView);
+    this.enemies = new Enemies(this.scene, this.speed, this.fieldOfView, this.enemyStartPos, this.playerPosition);
     // this.keyHandler = new KeyHandler(this.enemies);
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);

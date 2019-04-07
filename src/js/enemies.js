@@ -1,9 +1,11 @@
 import Enemy from './enemy';
 
 export default class Enemies {
-    constructor(scene, speed, view) {
+    constructor(scene, speed, view, startPos, playerPos) {
         this.enemies = [];
         this.speed = speed;
+        this.startPos = startPos;
+        this.playerPos = playerPos;
         this.view = view;
         this.positions = this.setPositions();
         this.scene = scene; 
@@ -13,11 +15,11 @@ export default class Enemies {
     setPositions() {
         let positions = []
         for (let i = 10; i >= -10; i -= 10) {
-            positions.push([this.view-5, i]);
-            positions.push([-1*this.view+5, i]);
+            positions.push([this.view-5, i, this.startPos]);
+            positions.push([-1*this.view+5, i, this.startPos]);
         }
-        for (let i = this.view; i >= this.view*-1; i -= 5) {
-            positions.push([i, Math.floor(this.view/3)])
+        for (let i = this.view; i >= this.view*-1; i -= this.view/10) {
+            positions.push([i, Math.floor(this.view/3), this.startPos])
         }
         return positions;
     }
@@ -27,7 +29,7 @@ export default class Enemies {
         setInterval(() => {
             let random = Math.floor(Math.random() * this.positions.length);
             let position = this.positions[random]
-            let enemy = new Enemy(position, this.scene, this.speed)
+            let enemy = new Enemy(position, this.scene, this.speed, this.playerPos)
             this.enemies.push(enemy);
         }, 500);
     }
