@@ -3,10 +3,15 @@ import 'three/examples/js/loaders/GLTFLoader';
 import { SpotLightHelper } from 'three';
 
 export default class Heart {
-  constructor(scene) {
+  constructor(scene, index) {
     this.scene = scene;
     this.pivot;
-    this.heart = this.startHeart();
+    this.heart;
+    this.index = index;
+
+    this.startHeart();
+
+    this.drawHeart = this.drawHeart.bind(this);
   }
   
   startHeart() {
@@ -14,14 +19,19 @@ export default class Heart {
 
     var loader = new THREE.GLTFLoader();
 
-    loader.load('src/models/player/scene.gltf', (ship) => {
-      ship.scene.rotation.y = 3.15;
-      // ship.scene.rotation.z = -1;
-      // ship.scene.rotation.x = -10;
-      ship.scene.position.z = -10;
-      ship.scene.position.y = -5;
-      return this.scene.add(ship.scene);
+    loader.load('src/models/heart/scene.gltf', (gltf) => {
+      gltf.scene.children[0].scale.set(.1, .1, .1);
+      gltf.scene.position.set(103 + 12 * this.index , -65, -100);
+      this.scene.add(gltf.scene);
 
+      const spotlight = new THREE.SpotLight(0xffffff);
+      spotlight.position.set (0, 1, 1);
+      spotlight.power = 2 * Math.PI;
+      this.scene.add(spotlight);
+
+      this.heart = gltf.scene.children[0];
+
+      // debugger
     }, undefined, function (error) {
 
       console.error(error);
@@ -53,6 +63,8 @@ export default class Heart {
   }
 
   drawHeart() {
-    // this.pivot.rotation.y += 0.05;
+    if (this.heart) {
+      this.heart.rotation.z += 0.05;
+    }
   }
 }

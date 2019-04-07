@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import Player from './player';
-import Heart from './heart';
+import Hearts from './hearts';
 import Enemies from './enemies';
 import KeyHandler from './key_handler';
 
@@ -27,7 +27,7 @@ export default class Game {
   }
 
   update() {
-    this.heart.drawHeart();
+    this.hearts.drawHearts();
     this.enemies.updateEnemy();
     requestAnimationFrame(this.animate.bind(this));
   }
