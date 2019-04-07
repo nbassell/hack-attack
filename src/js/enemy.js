@@ -2,11 +2,12 @@ import 'three/examples/js/loaders/GLTFLoader';
 import Word from './word';
 
 export default class Enemy {
-  constructor(position, scene, speed, playerPos) {
+  constructor(position, scene, speed, playerPos, trie) {
     this.position = position;
     this.scene = scene;
     this.speed = speed;
     this.playerPos = playerPos;
+    this.trie = trie;
     this.changeX = -1 * (this.position.x / this.speed);
     this.changeY = -1 * ((this.position.y - this.playerPos.y) / this.speed);
     this.changeZ = -1 * (this.position.z - this.playerPos.z) / this.speed;
@@ -22,10 +23,10 @@ export default class Enemy {
     });
 
     this.word = new Word(this.scene, this.position)
+    this.trie.insert(this.word, self);
   }
 
   setEnemy(enemy) {
-    enemy.scene.position.x
     enemy.scene.position.x = this.position.x;
     enemy.scene.position.y = this.position.y;
     enemy.scene.position.z = this.position.z;

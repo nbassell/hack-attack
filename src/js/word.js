@@ -1,5 +1,4 @@
 import dictionary from './dictionary.json';
-// import * as THREE from 'three';
 
 class Word {
   constructor(scene, position) {
@@ -7,7 +6,8 @@ class Word {
     this.position = position;
     this.word = dictionary[Math.floor(Math.random() * dictionary.length)];
     this.createText = this.createText.bind(this);
-    this. offset = { x : this.word.length/4, y: 1.5, z: 1 }
+    this.offset = { x : this.word.length/4, y: 1.5, z: 1 }
+
     this.startWord();
   }
 
@@ -33,7 +33,6 @@ class Word {
     var textMaterial = new THREE.MeshPhongMaterial( { color: 0xff0000 } );
 
     var mesh = new THREE.Mesh( textGeo, textMaterial );
-    // debugger
     mesh.position.set(this.position.x - this.offset.x, this.position.y - this.offset.y, this.position.z - this.offset.z);
     mesh.lookAt( 0, 0, 20);
 

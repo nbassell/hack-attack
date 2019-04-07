@@ -3,22 +3,29 @@ class TrieNode {
     this.letter = letter;
     this.isWord = false;
     this.children = {};
+    this.enemies = new Set();
   }
 }
 
 class Trie {
-  constructor() {
+  constructor(enemies) {
     this.root = new TrieNode(null);
   }
 
-  insert(word) {
+  addEnemies(enemies) {
+    this.enemies = enemies;
+  }
+
+  insert(wordNode, enemy) {
     let currentNode = this.root;
+    const word = wordNode.word;
 
     for (let letter of word) {
       if (!currentNode.children[letter]) {
         currentNode.children[letter] = new TrieNode(letter);
       }
       currentNode = currentNode.children[letter];
+      currentNode.enemies.add(enemy);
     }
 
     currentNode.isWord = true;
@@ -37,7 +44,10 @@ class Trie {
       }
     }
 
-    return currentNode.isWord;
+    if (currentNode.isWord) {
+      this.delete(word);
+      this.enemies
+    }
   }
 
   delete(word) {

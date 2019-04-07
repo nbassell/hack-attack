@@ -3,6 +3,7 @@ import Player from './player';
 import Hearts from './hearts';
 import Enemies from './enemies';
 import Starfield from './starfield';
+import Trie from './trie';
 import KeyHandler from './key_handler';
 
 export default class Game {
@@ -15,14 +16,22 @@ export default class Game {
     this.enemyStartPos = -50;
     this.camera.position.z = 0;
     this.player = new Player(this.scene, this.playerPosition);
+    this.trie = new Trie();
     this.hearts = new Hearts(this.scene, this.player);
-    this.enemies = new Enemies(this.scene, this.speed, this.fieldOfView, this.enemyStartPos, this.playerPosition);
+    this.enemies = new Enemies(this.scene, this.speed, this.fieldOfView, this.enemyStartPos, this.playerPosition, this.trie);
+    this.trie.addEnemies(this.enemies);
     this.starfield = new Starfield(this.scene);
-    // this.keyHandler = new KeyHandler(this.enemies);
+    this.keyHandler = new KeyHandler();
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.scene.background = new THREE.Color(0x000000);
     document.body.appendChild(this.renderer.domElement);
+  }
+
+  checkGuess() {
+    if (this.trie.contains(this.keyHandler.guess)) {
+      
+    }
   }
 
   animate() {
