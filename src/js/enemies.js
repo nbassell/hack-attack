@@ -2,18 +2,17 @@ import Enemy from './enemy';
 import Bullet from './bullet';
 
 export default class Enemies {
-    constructor(scene, speed, view, startPos, playerPos, trie) {
-        this.enemies = new Set();
-        this.bullets = [];
-        this.speed = speed;
-        this.startPos = startPos;
-        this.playerPos = playerPos;
-        this.view = view;
-        this.positions = this.setPositions();
-        this.scene = scene; 
-        this.trie = trie;
-        this.spawnEnemies();
-    }
+  constructor(scene, speed, view, startPos, playerPos, trie) {
+    this.enemies = new Set();
+    this.bullets = [];
+    this.speed = speed;
+    this.startPos = startPos;
+    this.playerPos = playerPos;
+    this.view = view;
+    this.positions = this.setPositions();
+    this.scene = scene;
+    this.trie = trie;
+  }
 
   cancelColor() {
     this.enemies.forEach(enemy => {
@@ -40,7 +39,7 @@ export default class Enemies {
       this.difficulty *= 1.2;
     }, 8000);
 
-    this.interval = setInterval(() => {
+    this.spawnInterval = setInterval(() => {
       let random = Math.floor(Math.random() * this.positions.length);
       let position = this.positions[random]
       let enemy = new Enemy(position, this.scene, this.speed, this.playerPos, this.trie);
@@ -50,7 +49,7 @@ export default class Enemies {
 
   stopSpawning() {
     clearInterval(this.difficultyInterval);
-    clearInterval(this.interval);
+    clearInterval(this.spawnInterval);
 
     this.enemies.forEach(enemy => {
       this.deleteEnemy(enemy, enemy.word.word)
@@ -66,25 +65,25 @@ export default class Enemies {
     this.enemies.delete(enemy);
   }
 
-    killEnemy(enemy, word) {
-        const bullet = new Bullet(this.scene, this.playerPos, enemy.enemy.scene.position, this.speed);
-        this.bullets.push(bullet);
-        this.deleteEnemy(enemy, word);
-    }
+  killEnemy(enemy, word) {
+    const bullet = new Bullet(this.scene, this.playerPos, enemy.enemy.scene.position, this.speed);
+    this.bullets.push(bullet);
+    this.deleteEnemy(enemy, word);
+  }
 
-    updateEnemy() {
-        let hit = false;
-        this.enemies.forEach((enemy) => {
-            if (enemy.updatePos()) {
-                hit = true;
-                this.deleteEnemy(enemy, enemy.word.word);
-            }
-        });
+  updateEnemy() {
+    let hit = false;
+    this.enemies.forEach((enemy) => {
+      if (enemy.updatePos()) {
+        hit = true;
+        this.deleteEnemy(enemy, enemy.word.word);
+      }
+    });
 
-        this.bullets.forEach(bullet => {
-            bullet.updatePos();
-        })
+    this.bullets.forEach(bullet => {
+      bullet.updatePos();
+    })
 
-        return hit;
-    }
+    return hit;
+  }
 }

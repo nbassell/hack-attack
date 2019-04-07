@@ -13,7 +13,7 @@ export default class Game {
     this.camera = new THREE.PerspectiveCamera(this.fieldOfView, window.innerWidth / window.innerHeight, 0.1, 1000);
     this.scene = new THREE.Scene();
     this.speed = 400;
-    this.playerPosition = {x: 0, y: -5, z: -10};
+    this.playerPosition = {x: 0, y: -5, z: -11};
     this.enemyStartPos = -50;
     this.camera.position.z = 0;
     this.player = new Player(this.scene, this.playerPosition, this);
@@ -62,6 +62,7 @@ export default class Game {
 
   update() {
     this.player.update();
+    
     let isHit = this.enemies.updateEnemy();
     if (isHit) {
       this.player.isHit();
