@@ -11,7 +11,7 @@ export default class Game {
     this.fieldOfView = 50;
     this.camera = new THREE.PerspectiveCamera(this.fieldOfView, window.innerWidth / window.innerHeight, 0.1, 1000);
     this.scene = new THREE.Scene();
-    this.speed = 200;
+    this.speed = 400;
     this.playerPosition = {x: 0, y: -5, z: -10};
     this.enemyStartPos = -50;
     this.camera.position.z = 0;
@@ -29,9 +29,9 @@ export default class Game {
   }
 
   checkGuess() {
-    if (this.trie.contains(this.keyHandler.guess)) {
-      
-    }
+    if (this.trie.contains(this.keyHandler.guess)) this.keyHandler.guess = "";
+    const potentialWords = this.trie.find(this.keyHandler.guess); 
+    
   }
 
   animate() {

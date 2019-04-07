@@ -2,7 +2,7 @@ import Enemy from './enemy';
 
 export default class Enemies {
     constructor(scene, speed, view, startPos, playerPos, trie) {
-        this.enemies = new Set();;
+        this.enemies = new Set();
         this.speed = speed;
         this.startPos = startPos;
         this.playerPos = playerPos;
@@ -32,7 +32,7 @@ export default class Enemies {
             let position = this.positions[random]
             let enemy = new Enemy(position, this.scene, this.speed, this.playerPos, this.trie);
             this.enemies.add(enemy);
-        }, 500);
+        }, 1000);
     }
 
     deleteEnemy(enemy) {

@@ -46,7 +46,7 @@ class Trie {
 
     if (currentNode.isWord) {
       this.delete(word);
-      this.enemies
+      this.enemies.removeEnemy(deleteEnemy);
     }
   }
 
