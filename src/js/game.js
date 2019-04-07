@@ -27,7 +27,7 @@ export default class Game {
   }
 
   update() {
-    this.heart.drawHeart();
+    this.hearts.forEach(heart => heart.drawHeart());
     this.enemies.updateEnemy();
     requestAnimationFrame(this.animate.bind(this));
   }

@@ -3,10 +3,11 @@ import 'three/examples/js/loaders/GLTFLoader';
 import { SpotLightHelper } from 'three';
 
 export default class Heart {
-  constructor(scene) {
+  constructor(scene, index) {
     this.scene = scene;
     this.pivot;
     this.heart;
+    this.index = index;
 
     this.startHeart();
 
@@ -20,12 +21,12 @@ export default class Heart {
 
     loader.load('src/models/heart/scene.gltf', (gltf) => {
       gltf.scene.children[0].scale.set(.1, .1, .1);
-      gltf.scene.position.set(80, -65, -100);
+      gltf.scene.position.set(103 + 12 * this.index , -65, -100);
       this.scene.add(gltf.scene);
 
       const spotlight = new THREE.SpotLight(0xffffff);
       spotlight.position.set (0, 1, 1);
-      spotlight.power = 1.9 * Math.PI;
+      spotlight.power = 2 * Math.PI;
       this.scene.add(spotlight);
 
       this.heart = gltf.scene.children[0];
