@@ -48,8 +48,8 @@ class Trie {
     }
 
     if (currentNode.isWord) {
-      this.enemies.deleteEnemy(currentNode.enemy, word);
       this.enemies.cancelColor();
+      this.enemies.killEnemy(currentNode.enemy, word);
       this.delete(word);
       return true;
     }

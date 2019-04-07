@@ -1,16 +1,19 @@
 import Enemy from './enemy';
+import Bullet from './bullet';
 
 export default class Enemies {
-  constructor(scene, speed, view, startPos, playerPos, trie) {
-    this.enemies = new Set();
-    this.speed = speed;
-    this.startPos = startPos;
-    this.playerPos = playerPos;
-    this.view = view;
-    this.positions = this.setPositions();
-    this.scene = scene;
-    this.trie = trie;
-  }
+    constructor(scene, speed, view, startPos, playerPos, trie) {
+        this.enemies = new Set();
+        this.bullets = [];
+        this.speed = speed;
+        this.startPos = startPos;
+        this.playerPos = playerPos;
+        this.view = view;
+        this.positions = this.setPositions();
+        this.scene = scene; 
+        this.trie = trie;
+        this.spawnEnemies();
+    }
 
   cancelColor() {
     this.enemies.forEach(enemy => {
@@ -63,14 +66,25 @@ export default class Enemies {
     this.enemies.delete(enemy);
   }
 
-  updateEnemy() {
-    let hit = false;
-    this.enemies.forEach((enemy) => {
-      if (enemy.updatePos()) {
-        hit = true;
-        this.deleteEnemy(enemy, enemy.word.word);
-      }
-    });
-    return hit;
-  }
+    killEnemy(enemy, word) {
+        const bullet = new Bullet(this.scene, this.playerPos, enemy.enemy.scene.position, this.speed);
+        this.bullets.push(bullet);
+        this.deleteEnemy(enemy, word);
+    }
+
+    updateEnemy() {
+        let hit = false;
+        this.enemies.forEach((enemy) => {
+            if (enemy.updatePos()) {
+                hit = true;
+                this.deleteEnemy(enemy, enemy.word.word);
+            }
+        });
+
+        this.bullets.forEach(bullet => {
+            bullet.updatePos();
+        })
+
+        return hit;
+    }
 }
